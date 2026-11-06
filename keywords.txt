@@ -1,0 +1,101 @@
+#######################################
+# Syntax Coloring for MicroTask Monitor
+#######################################
+
+# Datatypes (KEYWORD1)
+MicroTaskMonitor   KEYWORD1
+MTMCapability      KEYWORD1
+MTMAlertSeverity   KEYWORD1
+MTMAlertSource     KEYWORD1
+MTMMetricStatus    KEYWORD1
+MTMRAMSnapshot     KEYWORD1
+MTMCPUSnapshot     KEYWORD1
+MTMStorageSnapshot KEYWORD1
+MTMTemperatureSnapshot KEYWORD1
+MTMPowerSnapshot   KEYWORD1
+MTMGPUSnapshot     KEYWORD1
+MTMRTOSSnapshot    KEYWORD1
+MTMNetworkSnapshot KEYWORD1
+MTMRuntimeSnapshot KEYWORD1
+MTMSystemSnapshot  KEYWORD1
+MTMMonitorWarning KEYWORD1
+MonitorWarning     KEYWORD1
+
+# Methods and Functions (KEYWORD2)
+begin              KEYWORD2
+update             KEYWORD2
+available          KEYWORD2
+setSamplingInterval KEYWORD2
+enable             KEYWORD2
+disable            KEYWORD2
+isEnabled          KEYWORD2
+capabilities       KEYWORD2
+isSupported        KEYWORD2
+boardName          KEYWORD2
+memory             KEYWORD2
+ram                KEYWORD2
+cpu                KEYWORD2
+storage            KEYWORD2
+gpu                 KEYWORD2
+temperature        KEYWORD2
+power              KEYWORD2
+rtos                KEYWORD2
+network             KEYWORD2
+runtime             KEYWORD2
+snapshot           KEYWORD2
+printReport        KEYWORD2
+printJSON          KEYWORD2
+printCSV           KEYWORD2
+printCSVHeader     KEYWORD2
+setRAMWarning      KEYWORD2
+setRAMCritical     KEYWORD2
+setCPUWarning      KEYWORD2
+setCPUCritical     KEYWORD2
+setTemperatureWarning KEYWORD2
+setTemperatureCritical KEYWORD2
+setLowVoltageWarning  KEYWORD2
+setLowVoltageCritical KEYWORD2
+setStorageWarning  KEYWORD2
+setStorageCritical KEYWORD2
+setStackWarning    KEYWORD2
+setStackCritical   KEYWORD2
+onWarning          KEYWORD2
+addTransport       KEYWORD2
+clearTransports    KEYWORD2
+sendToTransports   KEYWORD2
+profiler           KEYWORD2
+bindFilesystem     KEYWORD2
+bindSD             KEYWORD2
+setExternalTemperatureSensor KEYWORD2
+setVoltageSensor   KEYWORD2
+setCurrentSensor   KEYWORD2
+
+# Constants (LITERAL1)
+RAM_MONITOR        LITERAL1
+HEAP_MONITOR       LITERAL1
+STACK_MONITOR      LITERAL1
+PSRAM_MONITOR      LITERAL1
+FRAGMENTATION      LITERAL1
+CPU_MONITOR        LITERAL1
+CPU_FREQUENCY      LITERAL1
+CPU_MULTICORE      LITERAL1
+CPU_LOAD_AVERAGES  LITERAL1
+STORAGE_MONITOR    LITERAL1
+FILESYSTEM          LITERAL1
+SD_CARD             LITERAL1
+EEPROM_MONITOR     LITERAL1
+FLASH_WEAR          LITERAL1
+GPU_MONITOR         LITERAL1
+DMA_MONITOR         LITERAL1
+TEMPERATURE_MONITOR LITERAL1
+POWER_MONITOR       LITERAL1
+RTOS_MONITOR         LITERAL1
+NETWORK_MONITOR     LITERAL1
+RUNTIME_MONITOR     LITERAL1
+PROFILER_MONITOR    LITERAL1
+
+# Transports (KEYWORD1)
+SerialTransport    KEYWORD1
+UARTTransport      KEYWORD1
+WiFiTransport      KEYWORD1
+BLETransport       KEYWORD1
