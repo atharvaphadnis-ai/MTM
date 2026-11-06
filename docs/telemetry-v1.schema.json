@@ -1,0 +1,165 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://microtaskmonitor.github.io/schemas/telemetry-v1.schema.json",
+  "title": "MicroTask Monitor telemetry payload (v1)",
+  "type": "object",
+  "required": ["protocol", "version", "board", "uptime_ms"],
+  "additionalProperties": false,
+  "properties": {
+    "protocol": { "type": "string", "const": "mtm-telemetry" },
+    "version": { "type": "integer", "const": 1 },
+    "board": { "type": "string", "maxLength": 32 },
+    "uptime_ms": { "type": "integer", "minimum": 0 },
+
+    "ram": {
+      "type": "object",
+      "required": ["total", "used", "free", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "total":               { "type": "integer", "minimum": 0 },
+        "used":                { "type": "integer", "minimum": 0 },
+        "free":                { "type": "integer", "minimum": 0 },
+        "min_ever_free":       { "type": "integer", "minimum": 0 },
+        "peak":                { "type": "integer", "minimum": 0 },
+        "fragmentation_pct":   { "type": "integer", "minimum": -1, "maximum": 100 },
+        "largest_free_block":  { "type": "integer", "minimum": 0 },
+        "psram_total":         { "type": "integer", "minimum": 0 },
+        "psram_used":          { "type": "integer", "minimum": 0 },
+        "stack_size":          { "type": "integer", "minimum": 0 },
+        "stack_hwm":           { "type": "integer", "minimum": 0 },
+        "alloc_failures":      { "type": "integer", "minimum": 0 },
+        "status":              { "$ref": "#/$defs/status" }
+      }
+    },
+
+    "cpu": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "frequency_hz":   { "type": "integer", "minimum": 0 },
+        "usage_pct":       { "type": "integer", "minimum": 0, "maximum": 100 },
+        "core_count":      { "type": "integer", "minimum": 0, "maximum": 4 },
+        "cores": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "id":          { "type": "integer" },
+              "usage_pct":   { "type": "integer", "minimum": 0, "maximum": 100 },
+              "idle_ms":     { "type": "integer", "minimum": 0 },
+              "active_ms":   { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "load_avg_1s":     { "type": "integer" },
+        "load_avg_5s":     { "type": "integer" },
+        "load_avg_60s":    { "type": "integer" },
+        "usage_status":    { "$ref": "#/$defs/status" }
+      }
+    },
+
+    "storage": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "flash_total":      { "type": "integer", "minimum": 0 },
+        "flash_used":       { "type": "integer", "minimum": 0 },
+        "fs_total":         { "type": "integer", "minimum": 0 },
+        "fs_used":          { "type": "integer", "minimum": 0 },
+        "sd_total":         { "type": "integer", "minimum": 0 },
+        "sd_used":          { "type": "integer", "minimum": 0 },
+        "eeprom_size":      { "type": "integer", "minimum": 0 },
+        "fs_write_cycles":  { "type": "integer", "minimum": 0 }
+      }
+    },
+
+    "temperature": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value_mc": { "type": "integer" },
+        "min_mc":   { "type": "integer" },
+        "max_mc":   { "type": "integer" },
+        "status":   { "$ref": "#/$defs/status" }
+      }
+    },
+
+    "power": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "voltage_mv":  { "type": "integer" },
+        "current_ua":  { "type": "integer" },
+        "power_uw":    { "type": "integer" },
+        "battery_pct": { "type": "integer", "minimum": -1, "maximum": 100 }
+      }
+    },
+
+    "gpu": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "usage_pct":      { "type": "integer", "minimum": 0, "maximum": 100 },
+        "dma_usage_pct":  { "type": "integer", "minimum": 0, "maximum": 100 },
+        "status":         { "$ref": "#/$defs/status" }
+      }
+    },
+
+    "rtos": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "task_count":    { "type": "integer", "minimum": 0 },
+        "total_runtime": { "type": "integer", "minimum": 0 },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "name":       { "type": "string", "maxLength": 16 },
+              "state":      { "type": "integer" },
+              "priority":   { "type": "integer" },
+              "stack_hwm":  { "type": "integer", "minimum": 0 },
+              "runtime":    { "type": "integer", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+
+    "network": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "connected":       { "type": "boolean" },
+        "rssi_dbm":        { "type": "integer" },
+        "ip":              { "type": "integer", "minimum": 0 },
+        "bytes_sent":      { "type": "integer", "minimum": 0 },
+        "bytes_recv":      { "type": "integer", "minimum": 0 },
+        "link_uptime_ms":  { "type": "integer", "minimum": 0 },
+        "tx_bps":          { "type": "integer", "minimum": 0 },
+        "rx_bps":          { "type": "integer", "minimum": 0 }
+      }
+    },
+
+    "runtime": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "uptime_ms":      { "type": "integer", "minimum": 0 },
+        "reboot_count":   { "type": "integer", "minimum": 0 },
+        "reset_reason":   { "type": "integer" },
+        "watchdog_reset": { "type": "boolean" }
+      }
+    }
+  },
+
+  "$defs": {
+    "status": {
+      "type": "string",
+      "enum": ["MEASURED", "ESTIMATE", "NOT_SUPPORTED", "DISABLED", "ERROR"]
+    }
+  }
+}
